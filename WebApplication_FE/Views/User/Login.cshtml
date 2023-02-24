@@ -1,0 +1,102 @@
+﻿@model WebApplication_FE.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+@*<script src="" type="text/javascript"></script>*@
+<script src="~/js/jquery-1.7.1.js" asp-append-version="true"></script>
+<script>
+
+     //$(document).ready(function () {
+     //        $("#test-form").click(function () {
+     //            //var login = new Object();
+     //            var uername = $('#Email').val();
+     //            var password = $('#Password').val();
+     //            //login.password = $('#Password').val();
+     //            const obj = {userName: uername, password: password};
+     //            const myJSON = JSON.stringify(obj);
+     //             console.log("myJSON", myJSON);
+
+     //            //alert(login.userName);
+     //            //alert(login.password);
+     //            $.ajax({
+     //                url: 'https://localhost:7249/User',
+     //                type: 'POST',
+     //                dataType: 'JSON',
+     //                data: myJSON ,
+                    
+     //                success: function (data, textStatus, xhr) {
+     //                    console.log(data);
+     //                },
+     //                error: function (xhr, textStatus, errorThrown) {
+     //                    console.log('Error in Operation');
+     //                }
+     //            });
+     //        });
+     //    });
+
+          $(document).ready(function () {
+             $("#Save").click(function () {
+                 var person = new Object();
+                 person.name = $('#name').val();
+                 person.surname = $('#surname').val();
+                 $.ajax({
+                     url: 'https://localhost:7249/User',
+                     type: 'POST',
+                     dataType: 'json',
+                     data: person,
+                     success: function (data, textStatus, xhr) {
+                         console.log(data);
+                     },
+                     error: function (xhr, textStatus, errorThrown) {
+                         console.log('Error in Operation');
+                     }
+                 });
+             });
+         });
+</script>
+<h2>Login</h2>
+<form id="form1">
+        Name :- <input type="text" name="name" id="name" />
+        Surname:- <input type="text" name="surname" id="surname" />
+        <input type="button" id="Save" value="Save Data" />
+    </form>
+@*<div class="row justify-content-md-center">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body" id="test-form">
+              @*  @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Username)
+                        @Html.TextBoxFor(model => model.Username, "", new { @class = "Username", @placeholder = "Username" })
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password)
+                        @Html.PasswordFor(model => model.Password, new { @class = "Password", @placeholder = "Password" })
+                    </div>
+                    <div class="form-group">
+                        <p class="text-danger">@ViewBag.Error</p>
+                        <input type="submit" name="submit" class="btn btn-primary" value="Login" />
+                    </div>
+                }*@
+               @* <form>
+                  <label for="lbEmail" style="margin-right: 27px;">Email:</label>
+                  <input type="text" id="Email" name="Email"><br><br>
+                  <label for="lbPassword">Password:</label>
+                  <input type="password" id="Password" name="Password"><br><br>
+                  <input type="submit" id="Save" value="Login">
+                </form>*@
+@*                  <label for="lbEmail" style="margin-right: 27px;">Email:</label>
+                  <input type="text" id="Email" name="Email"><br><br>
+                  <label for="lbPassword">Password:</label>
+                  <input type="password" id="Password" name="Password"><br><br>
+                  <input type="submit" id="Save" value="Login">*@
+            </div>
+        </div>
+    </div>
+</div>
