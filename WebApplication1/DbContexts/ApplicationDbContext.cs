@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication1.Model;
-using WebApplication1.Model.Dto;
 
 namespace WebApplication1.DbContexts
 {
@@ -21,7 +20,7 @@ namespace WebApplication1.DbContexts
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ProductDto>().HasData(new ProductDto
+            modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 1,
                 Name = "Shiba Inu",
@@ -30,7 +29,7 @@ namespace WebApplication1.DbContexts
                 ImageUrl = "",
                 CategoryName = "Pet",
             });
-            modelBuilder.Entity<ProductDto>().HasData(new ProductDto
+            modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 2,
                 Name = "Dogger Coin",
@@ -39,7 +38,7 @@ namespace WebApplication1.DbContexts
                 ImageUrl = "",
                 CategoryName = "Pet",
             });
-            modelBuilder.Entity<ProductDto>().HasData(new ProductDto
+            modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 3,
                 Name = "Aslaska",
@@ -48,7 +47,7 @@ namespace WebApplication1.DbContexts
                 ImageUrl = "",
                 CategoryName = "Pet",
             });
-            modelBuilder.Entity<ProductDto>().HasData(new ProductDto
+            modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 4,
                 Name = "Bug France",
@@ -56,6 +55,25 @@ namespace WebApplication1.DbContexts
                 Description = "Dog",
                 ImageUrl = "",
                 CategoryName = "Pet",
+            });
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Userid = Guid.NewGuid().ToString(),
+                Name = "Le Minh Tuan",
+                Password = "123",
+                Email = "lmtuan@gmail.com",
+                Role = "admin",
+
+            });
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Userid = Guid.NewGuid().ToString(),
+                Name = "Nguyen Van A",
+                Password = "123",
+                Email = "nva@gmail.com",
+                Role = "user",
             });
         }
     }

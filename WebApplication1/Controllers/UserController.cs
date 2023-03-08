@@ -8,6 +8,7 @@ using System.Text;
 using WebApplication1.DbContexts;
 using WebApplication1.Model;
 using WebApplication1.Model.Dto;
+using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers
 {
@@ -18,12 +19,14 @@ namespace WebApplication1.Controllers
 		protected Response _response;
 		private IConfiguration _config;
 		private readonly ApplicationDbContext _db;
+		private IUserRepository _userRepository; 
 
-		public UserController(IConfiguration config, ApplicationDbContext db)
+		public UserController(IConfiguration config, ApplicationDbContext db, IUserRepository userRepository)
 		{
 			_response = new Response();
 			_config = config;
 			_db = db;
+			_userRepository = userRepository;
 		}
 
 		//[HttpPost]
@@ -75,6 +78,26 @@ namespace WebApplication1.Controllers
 		//		return Unauthorized(_response);
 		//	}
 		//}
+		[HttpPost]
+		[Route("Register")]
+		[Authorize(Roles = "admin")]
+		public async Task<IActionResult> Register([FromBody]UserDto userDto)
+        {
+            try
+            {
+				var register = await _userRepository.CreateUpdateUser(userDto);
+				_response.Result = register;
+				_response.DisplayMessage = "Check mail to active account";
+				_response.IsSuccess = true;
+            }
+            catch (Exception ex)
+			{
+				_response.IsSuccess = false;
+				_response.ErrorMessages = new List<string> { ex.Message };
+				return BadRequest(_response);
+			}
+			return Ok(_response);
+        }
 
 		[HttpPost]
 		[AllowAnonymous]

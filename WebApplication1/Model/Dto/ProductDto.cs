@@ -2,7 +2,7 @@
 
 namespace WebApplication1.Model.Dto
 {
-	public class Product
+	public class ProductDto
 	{
         [Key]
         public int ProductId { get; set; }

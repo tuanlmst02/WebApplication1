@@ -10,8 +10,11 @@ namespace WebApplication1
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<ProductDto, Product>();
                 config.CreateMap<Product, ProductDto>();
+                config.CreateMap<ProductDto, Product>();
+                config.CreateMap<User, UserDto>();
+                config.CreateMap<UserDto, User>();
+
             });
             return mappingConfig;
         }

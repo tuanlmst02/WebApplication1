@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication1.Model
+namespace WebApplication1.Model.Dto
 {
-	public class User
+    public class UserDto
     {
         [Required]
-        public string Userid { get; set; } = null!;
         public string? Name { get; set; }
+        [Required]
         public string? Password { get; set; }
+        [Required]
         public string? Email { get; set; }
         public string? Role { get; set; }
-        public bool IsActive { get; set; } = false;
     }
 }

@@ -8,7 +8,6 @@ namespace WebApplication1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-	[Authorize]
     public class ProductController : ControllerBase
 	{
         protected Response _response;
@@ -19,7 +18,9 @@ namespace WebApplication1.Controllers
             _response = new Response();
             _productRepository = productRepository;
 		}
+
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<object> Get()
         {
             try

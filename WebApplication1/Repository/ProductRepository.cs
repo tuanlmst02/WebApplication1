@@ -17,7 +17,7 @@ namespace WebApplication1.Repository
             _mapper = mapper;
         }
 
-		public Task<ProductDto> CreateUpdateProduct(ProductDto productDto)
+		public Task<Product> CreateUpdateProduct(ProductDto productDto)
 		{
 			throw new NotImplementedException();
 		}
@@ -27,7 +27,7 @@ namespace WebApplication1.Repository
 			throw new NotImplementedException();
 		}
 
-		public Task<ProductDto> GetProductById(int ProducId)
+		public Task<Product> GetProductById(int ProducId)
 		{
 			throw new NotImplementedException();
 		}

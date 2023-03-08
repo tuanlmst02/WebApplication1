@@ -7,33 +7,13 @@
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class AddUserAndRole : Migration
+    public partial class AddDataAndColumnIsActive : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "ProductId",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "ProductId",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "ProductId",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Products",
-                keyColumn: "ProductId",
-                keyValue: 4);
-
             migrationBuilder.CreateTable(
-                name: "ProductDto",
+                name: "Products",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
@@ -46,7 +26,7 @@ namespace WebApplication1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductDto", x => x.ProductId);
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,36 +50,12 @@ namespace WebApplication1.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    JobId = table.Column<int>(type: "int", nullable: true)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Userid);
                 });
-
-            migrationBuilder.InsertData(
-                table: "ProductDto",
-                columns: new[] { "ProductId", "CategoryName", "Description", "ImageUrl", "Name", "Price" },
-                values: new object[,]
-                {
-                    { 1, "Pet", "Dog", "", "Shiba Inu", 1.0 },
-                    { 2, "Pet", "Dog", "", "Dogger Coin", 12.0 },
-                    { 3, "Pet", "Dog", "", "Aslaska", 23.0 },
-                    { 4, "Pet", "Dog", "", "Bug France", 30.0 }
-                });
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "ProductDto");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.InsertData(
                 table: "Products",
@@ -111,6 +67,28 @@ namespace WebApplication1.Migrations
                     { 3, "Pet", "Dog", "", "Aslaska", 23.0 },
                     { 4, "Pet", "Dog", "", "Bug France", 30.0 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Userid", "Email", "IsActive", "Name", "Password", "Role" },
+                values: new object[,]
+                {
+                    { "d8bbdb3d-c158-4cde-8690-8b5de17e957b", "lmtuan@gmail.com", false, "Le Minh Tuan", "123", "admin" },
+                    { "e53c0fc8-ab11-433c-b747-7003f60b2db5", "nva@gmail.com", false, "Nguyen Van A", "123", "user" }
+                });
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

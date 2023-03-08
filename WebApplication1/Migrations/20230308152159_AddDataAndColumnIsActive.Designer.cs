@@ -11,8 +11,8 @@ using WebApplication1.DbContexts;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230221041228_ProductDB")]
-    partial class ProductDB
+    [Migration("20230308152159_AddDataAndColumnIsActive")]
+    partial class AddDataAndColumnIsActive
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace WebApplication1.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication1.Model.ProductDto", b =>
+            modelBuilder.Entity("WebApplication1.Model.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -91,6 +91,64 @@ namespace WebApplication1.Migrations
                             ImageUrl = "",
                             Name = "Bug France",
                             Price = 30.0
+                        });
+                });
+
+            modelBuilder.Entity("WebApplication1.Model.Role", b =>
+                {
+                    b.Property<string>("Roleid")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Roleid");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("WebApplication1.Model.User", b =>
+                {
+                    b.Property<string>("Userid")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Userid");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Userid = "d8bbdb3d-c158-4cde-8690-8b5de17e957b",
+                            Email = "lmtuan@gmail.com",
+                            IsActive = false,
+                            Name = "Le Minh Tuan",
+                            Password = "123",
+                            Role = "admin"
+                        },
+                        new
+                        {
+                            Userid = "e53c0fc8-ab11-433c-b747-7003f60b2db5",
+                            Email = "nva@gmail.com",
+                            IsActive = false,
+                            Name = "Nguyen Van A",
+                            Password = "123",
+                            Role = "user"
                         });
                 });
 #pragma warning restore 612, 618
