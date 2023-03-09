@@ -11,5 +11,6 @@ namespace WebApplication1.Model
         public string? Email { get; set; }
         public string? Role { get; set; }
         public bool IsActive { get; set; } = false;
+        public string? LinkActive { get; set; }
     }
 }

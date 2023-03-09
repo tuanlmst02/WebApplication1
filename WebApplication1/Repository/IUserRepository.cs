@@ -5,7 +5,8 @@ namespace WebApplication1.Repository
 {
     public interface IUserRepository
     {
-        Task<User> CreateUpdateUser(UserDto userDto);
+        Task<User> CreateUser(UserDto userDto);
 
+        Task<User> ActiveUser(string linkActive);
     }
 }

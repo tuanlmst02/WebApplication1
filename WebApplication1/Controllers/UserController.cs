@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
 		protected Response _response;
 		private IConfiguration _config;
 		private readonly ApplicationDbContext _db;
-		private IUserRepository _userRepository; 
+		private IUserRepository _userRepository;
 
 		public UserController(IConfiguration config, ApplicationDbContext db, IUserRepository userRepository)
 		{
@@ -81,23 +81,51 @@ namespace WebApplication1.Controllers
 		[HttpPost]
 		[Route("Register")]
 		[Authorize(Roles = "admin")]
-		public async Task<IActionResult> Register([FromBody]UserDto userDto)
-        {
-            try
-            {
-				var register = await _userRepository.CreateUpdateUser(userDto);
+		public async Task<IActionResult> Register([FromBody] UserDto userDto)
+		{
+			try
+			{
+				var register = await _userRepository.CreateUser(userDto);
 				_response.Result = register;
 				_response.DisplayMessage = "Check mail to active account";
 				_response.IsSuccess = true;
-            }
-            catch (Exception ex)
+			}
+			catch (Exception ex)
 			{
 				_response.IsSuccess = false;
 				_response.ErrorMessages = new List<string> { ex.Message };
 				return BadRequest(_response);
 			}
 			return Ok(_response);
-        }
+		}
+
+		[HttpGet]
+		[Route("Active")]
+		public async Task<IActionResult> ActiveAccount(string Id)
+		{
+			try
+			{
+				var userActive = await _userRepository.ActiveUser(Id);
+				if (userActive == null)
+				{
+					_response.IsSuccess = false;
+					_response.ErrorMessages = new List<string> { "Active Account Failed" };
+				}
+				else
+				{
+					_response.IsSuccess = true;
+					_response.DisplayMessage = "Active Account Success";
+				}
+			}
+			catch (Exception ex)
+			{
+				_response.IsSuccess = false;
+				_response.ErrorMessages = new List<string> { ex.Message };
+				return BadRequest(_response);
+			}
+
+			return Ok(_response);
+		}
 
 		[HttpPost]
 		[AllowAnonymous]
